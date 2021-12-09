@@ -1,6 +1,6 @@
 <?php
 
-namespace Skycoder\LaravelFilesaver;
+namespace Skycoder\UserLog;
 
 use Illuminate\Support\ServiceProvider;
 
