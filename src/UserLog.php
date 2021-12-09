@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 trait UserLog
 {
 
+
     public static function boot()
     {
         parent::boot();
@@ -15,18 +16,20 @@ trait UserLog
 
         if (!App::runningInConsole()) {
 
-            $data = [];
-
-            if (Schema::hasColumn('users', 'created_by')) {
-                $data['created_by'] = auth()->id();
-            }
 
 
+            static::creating(function ($model) {
 
-            static::creating(function ($model) use ($data) {
 
-                if (Schema::hasColumn('users', 'company_id')) {
-                    $data['company_id'] = auth()->id();
+                $data = [];
+
+                if (Schema::hasColumn($model->getTable(), 'created_by')) {
+                    $data['created_by'] = auth()->id();
+                }
+
+
+                if (Schema::hasColumn($model->getTable(), 'company_id') && Schema::hasColumn('users', 'company_id')) {
+                    $data['company_id'] = auth()->user()->company_id;
                 }
 
                 if (count($data) > 0) {
@@ -39,13 +42,13 @@ trait UserLog
             static::updating(function ($model) {
 
 
-                if (Schema::hasColumn('users', 'updated_by')) {
+                if (Schema::hasColumn($model->getTable(), 'updated_by')) {
                     $model->fill([
                         'updated_by' => auth()->id()
                     ]);
                 }
 
-                if (Schema::hasColumn('users', 'approved_by')) {
+                if (Schema::hasColumn($model->getTable(), 'approved_by')) {
 
                     if ($model->isDirty('approved_by')) {
                         $model->fill([
@@ -64,24 +67,44 @@ trait UserLog
 
     public function created_user()
     {
-        return $this->belongsTo(User::class, 'created_by', 'id');
+
+        $class_name = self::class;
+        $table_name = (new $class_name())->getTable();
+
+        if (Schema::hasColumn($table_name, 'created_by')) {
+            return $this->belongsTo(User::class, 'created_by', 'id');
+        }
     }
 
     public function updated_user()
     {
-        return $this->belongsTo(User::class, 'updated_by', 'id');
+
+        $class_name = self::class;
+        $table_name = (new $class_name())->getTable();
+
+        if (Schema::hasColumn($table_name, 'updated_by')) {
+            return $this->belongsTo(User::class, 'updated_by', 'id');
+        }
     }
 
     public function approved_user()
     {
-        if (Schema::hasColumn('users', 'approved_by')) {
+
+        $class_name = self::class;
+        $table_name = (new $class_name())->getTable();
+
+        if (Schema::hasColumn($table_name, 'approved_by')) {
             return $this->belongsTo(User::class, 'approved_by', 'id');
         }
     }
 
     public function company()
     {
-        if (Schema::hasColumn('users', 'company_id')) {
+
+        $class_name = self::class;
+        $table_name = (new $class_name())->getTable();
+
+        if (Schema::hasColumn($table_name, 'company_id')) {
             return $this->belongsTo(Company::class, 'company_id', 'id');
         }
     }

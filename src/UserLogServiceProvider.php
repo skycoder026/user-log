@@ -13,6 +13,13 @@ class UserLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/views', 'user-log');
+
+
+        $this->publishes(
+            [__DIR__ . '/views' => base_path('resources/views/vendor/user-log')],
+            'user-log'
+        );
     }
 
     /**
