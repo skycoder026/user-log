@@ -1,0 +1,29 @@
+{
+    "name": "skycoder/user-log",
+    "description": "An Awesome Package That Store User Creating, Updating, Approved and Company Log",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Skycoder",
+            "email": "akashcseuu026@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Skycoder\\UserLog\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Skycoder\\UserLog\\UserLogServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
