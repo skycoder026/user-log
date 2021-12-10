@@ -1,8 +1,21 @@
 {
     "name": "skycoder/user-log",
     "description": "An Awesome Package That Store User Creating, Updating, Approved and Company Log",
-    "type": "project",
     "license": "MIT",
+    "keywords": [
+        "user-log",
+        "user-activity",
+        "user-log-activity",
+        "created_by",
+        "updated_by",
+        "approved_by",
+        "created_user",
+        "updated_user",
+        "approved_user",
+        "asmakash",
+        "akashcsem",
+        "skycoder"
+    ],
     "authors": [
         {
             "name": "Skycoder",
@@ -24,6 +37,10 @@
             ]
         }
     },
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "stable",
+    "readme": "./readme.md",
+    "time": "2021-12-09",
+    "require": {
+        "php": "^7.2.5"
+    }
 }
