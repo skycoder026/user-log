@@ -6,7 +6,7 @@ This is a small package to easy and simplify your code.
 
 ## Installation Process
 
-```
+```bash
 composer require skycoder/user-log
 ```
 
@@ -19,9 +19,10 @@ You should use `use UserLog;` trait to your model which contain `use Skycoder\Us
 
 And also use `@include('user-log::user-logs', ['data' => $item])` to your table where you display your data. here $item is your model data.
 
-## Example for model
+## Example for Model
 
-```<?php
+```php
+<?php
 
 namespace App\Models;
 
@@ -35,7 +36,7 @@ class ModelName extends Model
 ```
 
 ## Example For Blade File
-```
+```blade
 <table class="table">
       <thead>
           <tr>
@@ -62,3 +63,4 @@ class ModelName extends Model
 ```
 
 ## Result/Output
+![Output Image](https://github.com/skycoder026/user-log/blob/master/screenshot.PNG)
